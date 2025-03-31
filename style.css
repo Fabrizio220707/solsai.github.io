@@ -1,0 +1,7 @@
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+a, button, span {
+    -webkit-tap-highlight-color: transparent;
+}

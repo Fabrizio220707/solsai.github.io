@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Lateral</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="diseño.css">
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Eliminar el cuadro azul al hacer clic */
+        *:focus {
+            outline: none;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Barra superior */
+        .topbar {
+            background: rgba(255, 255, 255, 0.6);
+            height: 50px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .menu-icon {
+            font-size: 25px;
+            cursor: pointer;
+            position: absolute;
+            left: 15px;
+            user-select: none;
+        }
+
+        /* Fondo gris oscuro cuando el menú esté activo */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(169, 169, 169, 0.7); /* Gris oscuro */
+            z-index: 900;
+        }
+
+        /* Menú lateral */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: rgba(169, 169, 169, 0.9); /* Gris oscuro */
+            overflow-x: hidden;
+            transition: 0.4s;
+            padding-top: 60px;
+            box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+        }
+
+        .sidebar a {
+            padding: 15px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #ff3a7b;
+            display: block;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .sidebar a:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Botón de cerrar */
+        .closebtn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        /* Contenido principal */
+        .content {
+            margin-top: 80px;
+            padding: 20px;
+            font-size: 18px;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Barra superior con botón de menú y nombre de usuario -->
+<div class="topbar">
+    <span class="menu-icon" onclick="openMenu()">☰</span>
+    <h2 style="margin: 0; font-size: 20px;">Menú</h2>
+    <span id="nombreUsuario" style="position: absolute; right: 15px; font-weight: bold;"></span>
+</div>
+
+<script>
+    // Recuperar el usuario guardado y mostrarlo
+    document.addEventListener("DOMContentLoaded", function() {
+        var usuario = localStorage.getItem("usuarioActivo");
+        if (usuario) {
+            document.getElementById("nombreUsuario").textContent = usuario;
+        } else {
+            document.getElementById("nombreUsuario").textContent = "Invitado";
+        }
+    });
+</script>
+
+    <!-- Fondo gris oscuro (overlay) -->
+    <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+    <!-- Menú lateral -->
+<div id="sidebar" class="sidebar">
+    <span class="closebtn" onclick="closeMenu()">×</span>
+
+    <!-- Logo -->
+    <div style="text-align: center; margin-bottom: 15px;">
+        <img src="imagenes/logo.png" alt="Logo" style="width: 100px; height: 100px; border-radius: 10px;">
+    </div>
+
+    <!-- Enlace con borde RGB -->
+<a href="corazones.html" class="borde-rgb">Diseño ❤️🦖</a>
+<a href="vasos.html" class="borde-rgb">Juego de Vasos 🥤</a>
+</div>
+
+    <!-- Contenido principal -->
+    <div class="content">
+        <h1>Bienvenido 💖</h1>
+        <p>Haz clic en ☰ para abrir el menú.</p>
+    </div>
+
+    <script>
+        function openMenu() {
+            document.getElementById("sidebar").style.width = "250px";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function closeMenu() {
+            document.getElementById("sidebar").style.width = "0";
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script>
+</body>
+</html>

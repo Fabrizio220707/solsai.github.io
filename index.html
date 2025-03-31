@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #000428, #004e92);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+
+        /* Indicador de estado */
+        .status {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 18px;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .status span {
+            width: 12px;
+            height: 12px;
+            margin-left: 5px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* Estilo de la caja de inicio de sesión */
+        .login-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 25px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            color: white;
+            width: 320px;
+        }
+
+        input {
+            width: 95%;
+            padding: 12px;
+            margin: 12px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border: 2px solid #ffcc00;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #ff4b2b;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #ff3a1b;
+        }
+
+        /* Mensaje de error */
+        .error {
+            color: yellow;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body onload="updateStatus()">
+
+    <!-- Indicador de Estado -->
+    <div class="status">Estado: <span id="status-dot"></span></div>
+
+    <!-- Caja de inicio de sesión -->
+    <div class="login-box">
+        <h2>Iniciar Sesión</h2>
+        <input type="text" id="username" placeholder="Usuario">
+        <input type="password" id="password" placeholder="Contraseña">
+        <button onclick="checkLogin()">Entrar</button>
+        <div class="error" id="error-message"></div>
+    </div>
+<script>
+    function updateStatus() {
+        let status = localStorage.getItem("staffStatus");
+        let statusDot = document.getElementById("status-dot");
+
+        if (status === "on") {
+            statusDot.style.background = "green";
+        } else {
+            statusDot.style.background = "red";
+        }
+    }
+
+    function checkLogin() {
+        let user = document.getElementById("username").value;
+        let pass = document.getElementById("password").value;
+        let status = localStorage.getItem("staffStatus");
+
+        if (user === "Staff" && pass === "13795") {
+            localStorage.setItem("usuarioActivo", user); // Guarda el usuario
+            window.location.href = "staff.html"; // Siempre tiene acceso
+        } else if ((user === "Rachell" || user === "Fabrizio") && pass === "2228") {
+            if (status === "on") {
+                localStorage.setItem("usuarioActivo", user); // Guarda el usuario
+                window.location.href = "menu.html"; // Solo si está en ON
+            } else {
+                document.getElementById("error-message").textContent = "Fuera de línea.";
+            }
+        } else {
+            document.getElementById("error-message").textContent = "Usuario o contraseña incorrectos.";
+        }
+    }
+</script>
+
+</body>
+</html>

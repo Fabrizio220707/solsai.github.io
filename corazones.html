@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corazones Animados</title>
+    <style>
+        body {
+            background-color: black;
+            overflow: hidden;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Nombre en la parte superior izquierda */
+        .top-left {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        /* F ✨ en la parte inferior derecha */
+        .bottom-right {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Contenedor del corazón */
+        .heart-container {
+            position: absolute;
+            font-size: 80px;
+            color: red;
+            opacity: 0;
+            animation: appear 2s forwards;
+        }
+
+        @keyframes appear {
+            0% { opacity: 0; transform: scale(0); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Partículas flotando */
+        .particle {
+            position: absolute;
+            color: red;
+            font-size: 10px;
+            animation: float 4s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100px) scale(0.5); opacity: 0; }
+        }
+
+        /* Explosión de corazones */
+        .small-heart {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            opacity: 0;
+            animation: explode 0.6s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% { opacity: 1; transform: scale(1) translate(0, 0); }
+            100% { opacity: 0; transform: scale(1.5) translate(var(--x), var(--y)); }
+        }
+
+        /* Mensaje aleatorio */
+        .message {
+            position: absolute;
+            font-size: 40px;
+            font-weight: bold;
+            color: red;
+            font-family: Arial, sans-serif;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            animation: fadeOut 2s ease-out forwards;
+        }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nombre en la parte superior izquierda -->
+    <div class="top-left">Rachell 🦖</div>
+
+    <!-- F ✨ en la parte inferior derecha -->
+    <div class="bottom-right">F ✨</div>
+
+    <script>
+        let clickCount = 0;
+        let clickTimer;
+
+        // Crear partículas flotando
+        function createParticles() {
+            for (let i = 0; i < 50; i++) {
+                let particle = document.createElement("div");
+                particle.className = "particle";
+                particle.innerHTML = "❤️";
+                document.body.appendChild(particle);
+
+                let x = Math.random() * window.innerWidth;
+                let y = Math.random() * window.innerHeight;
+                let delay = Math.random() * 4;
+
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                particle.style.animationDelay = `-${delay}s`;
+
+                setTimeout(() => { particle.remove(); }, 4000);
+            }
+        }
+
+        createParticles();
+        setInterval(createParticles, 4000);
+
+        // Efecto de explosión al hacer clic
+        document.addEventListener("click", function(event) {
+            clickCount++;
+            clearTimeout(clickTimer);
+            
+            clickTimer = setTimeout(() => { clickCount = 0; }, 2000); // Resetear después de 2 segundos
+
+            for (let i = 0; i < 10; i++) {
+                let heart = document.createElement("div");
+                heart.className = "small-heart";
+                heart.innerHTML = "❤️";
+                document.body.appendChild(heart);
+
+                let x = event.clientX;
+                let y = event.clientY;
+                let offsetX = (Math.random() - 0.5) * 100;
+                let offsetY = (Math.random() - 0.5) * 100;
+
+                heart.style.left = `${x}px`;
+                heart.style.top = `${y}px`;
+                heart.style.setProperty("--x", `${offsetX}px`);
+                heart.style.setProperty("--y", `${offsetY}px`);
+
+                setTimeout(() => { heart.remove(); }, 600);
+            }
+
+            if (clickCount >= 10) {
+                showBigExplosion(event.clientX, event.clientY);
+                showRandomMessage();
+                clickCount = 0;
+            }
+        });
+
+        // Explosión grande con corazones más grandes
+        function showBigExplosion(x, y) {
+            for (let i = 0; i < 30; i++) {
+                let heart = document.createElement("div");
+                heart.className = "small-heart";
+                heart.innerHTML = "❤️";
+                heart.style.fontSize = "40px";
+                document.body.appendChild(heart);
+
+                let offsetX = (Math.random() - 0.5) * 300;
+                let offsetY = (Math.random() - 0.5) * 300;
+
+                heart.style.left = `${x}px`;
+                heart.style.top = `${y}px`;
+                heart.style.setProperty("--x", `${offsetX}px`);
+                heart.style.setProperty("--y", `${offsetY}px`);
+
+                setTimeout(() => { heart.remove(); }, 1000);
+            }
+        }
+
+        // Mensaje aleatorio
+        function showRandomMessage() {
+            let messages = ["Te quiero mucho ❤️", "Rawr 🦖✨"];
+            let randomMessage = messages[Math.floor(Math.random() * messages.length)];
+
+            let message = document.createElement("div");
+            message.className = "message";
+            message.innerHTML = randomMessage;
+            document.body.appendChild(message);
+
+            setTimeout(() => { message.remove(); }, 2000);
+        }
+    </script>
+
+</body>
+</html>

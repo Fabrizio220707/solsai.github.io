@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #222;
+    color: white;
+}
+
+#game-container {
+    margin-top: 50px;
+    max-width: 320px;
+    margin: auto;
+    position: relative;
+}
+
+h1 {
+    margin-top: 20px;
+}
+
+#attempts {
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    font-size: 18px;
+    background: crimson;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#vase-box {
+    width: 320px;  /* Rectángulo que contiene los vasos */
+    height: 140px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: auto;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    overflow: hidden; /* Asegura que los vasos no salgan */
+}
+
+.vase {
+    width: 80px;
+    height: 100px;
+    transition: transform 0.5s ease-in-out, left 0.5s ease-in-out;
+    position: absolute;
+    cursor: pointer;
+}
+
+.vase img {
+    width: 100%;
+    height: 100%;
+}
+
+#emoji {
+    font-size: 40px;
+    position: absolute;
+    display: none;
+    transition: transform 0.5s;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    background: crimson;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: darkred;
+}

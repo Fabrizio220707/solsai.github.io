@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Vasos</title>
+    <link rel="stylesheet" href="styleco.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <h1>Juego de Vasos</h1>
+        <div id="attempts">Intentos: 2</div>
+        
+        <!-- Contenedor rectangular -->
+        <div id="vase-box">
+            <div class="vase" id="vase1" onclick="checkChoice(0)"><img src="imagenes/vaso.png" alt="Vaso"></div>
+            <div class="vase" id="vase2" onclick="checkChoice(1)"><img src="imagenes/vaso.png" alt="Vaso"></div>
+            <div class="vase" id="vase3" onclick="checkChoice(2)"><img src="imagenes/vaso.png" alt="Vaso"></div>
+        </div>
+
+        <div id="emoji">🦖</div>
+        <p id="message">Adivina dónde está el dinosaurio (2 intentos)</p>
+        <button id="start" onclick="startGame()">Iniciar</button>
+        <button id="restart" style="display:none;" onclick="resetGame()">Reiniciar Juego</button>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

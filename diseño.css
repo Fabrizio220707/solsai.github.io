@@ -1,0 +1,20 @@
+@keyframes cambiarColor {
+    0% { border-color: #fcb1b1; }  /* Rosa pastel */
+    25% { border-color: #fce1b1; } /* Amarillo pastel */
+    50% { border-color: #b1fcd6; } /* Verde pastel */
+    75% { border-color: #b1d6fc; } /* Azul pastel */
+    100% { border-color: #fcb1f3; } /* Morado pastel */
+}
+
+.borde-rgb {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 3px solid;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff3a7b;
+    animation: cambiarColor 3s infinite alternate;
+}
